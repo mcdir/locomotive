@@ -4,10 +4,7 @@ import nltk
 import numpy
 import sys
 
-import locomotive
-
 sys.stdout = codecs.getwriter(locale.getpreferredencoding())(sys.stdout)
-
 
 class CategoryAssociations:
     def __init__(self, category_array):
@@ -52,7 +49,7 @@ class CategoryAssociations:
             return -1
 
     def valid_coordinates(self, idx1, idx2):
-        i1 = int(idx1);
+        i1 = int(idx1)
         i2 = int(idx2)
         if (i1 >= 0) and (i2 >= 0) and (i1 < self.size()) and (i2 < self.size()):
             return True

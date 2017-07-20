@@ -38,7 +38,7 @@ class Recommend:
             results = self.knn_classify(prof, self.dataset, self.labels, 10)
             print "cat1: %-10s  result is %s for case %d, %s" % (cat1, results, i, info)
             for tup in results:
-                cat2 = tup[0];
+                cat2 = tup[0]
                 count = tup[1]
                 if cat1 != cat2:
                     self.cat_assoc.increment(cat1, cat2, count)
@@ -88,8 +88,8 @@ class Recommend:
             print "category_index %d = %s" % (i, cat)
 
     def collect_items_data(self):
-        labels = [];
-        profiles = [];
+        labels = []
+        profiles = []
         items_info = []
         for item in self.rss_items:
             profile = []

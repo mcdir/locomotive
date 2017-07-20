@@ -4,7 +4,7 @@ import httplib
 import locale
 import pickle
 import sys
-from   urlparse import urlparse
+from urlparse import urlparse
 
 sys.stdout = codecs.getwriter(locale.getpreferredencoding())(sys.stdout)
 

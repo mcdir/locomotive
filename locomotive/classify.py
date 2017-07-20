@@ -1,7 +1,7 @@
 import codecs
 import locale
 import nltk
-from   numpy import *
+from numpy import *
 import operator
 import os
 import pickle
@@ -192,14 +192,14 @@ class Classify:
 
         if True:
             summary_lines = []
-            actual_category_counts = {};
+            actual_category_counts = {}
             guessed_category_counts = {}
-            correct_category_counts = {};
-            close_category_counts = {};
+            correct_category_counts = {}
+            close_category_counts = {}
             wrong_category_counts = {}
-            correct_count = 0;
-            close_count = 0;
-            wrong_count = 0;
+            correct_count = 0
+            close_count = 0
+            wrong_count = 0
             classified_count = 0
             for item in rss_items:
                 feat = item.features(top_words)
@@ -296,7 +296,7 @@ class Classify:
             data_labels.append(item.category)
 
         data_group = array(data_arrays)
-        correct_count = 0;
+        correct_count = 0
         wrong_count = 0
 
         for (i, item) in enumerate(feed_items):
@@ -334,7 +334,7 @@ class Classify:
             data_labels.append(item.category)
 
         data_group = array(data_arrays)
-        correct_count = 0;
+        correct_count = 0
         wrong_count = 0
 
         for (i, item) in enumerate(self.rss_items):
