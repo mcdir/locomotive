@@ -107,7 +107,7 @@ class Classify:
             line = "%s | UNCAT | %s - %s " % (fi.lookup_key(), fi.title, fi.feed_url)
             out_lines.append(line)
         out_lines.sort()
-        self.app.write_data_file('training_categories_gen.txt', out_lines)
+        self.app.write_data_file('training_categories.txt', out_lines)
 
     def load_pickled_feed_items(self, app, categories, stop_words):
         feed_items = []
