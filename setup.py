@@ -7,7 +7,8 @@ setup(name='locomotive',
       author='Unknown',
       author_email='unknown@unknown.xxx',
       license='MIT',
-      packages=['ML'],
+      packages=['locomotive'],
+      scripts=['bin/locomotive_main'],
       install_requires=[
           'nltk',
           'feedparser'
