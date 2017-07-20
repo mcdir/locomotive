@@ -16,6 +16,8 @@ def display_options():
     print('    recommend_by_cats - determine article related categories using other categories')
     print('  Example:')
     print('    python locomotive_main.py knn_reuters')
+
+    sys.exit()
     
 if __name__ == "__main__":
     start_time = time.time()
