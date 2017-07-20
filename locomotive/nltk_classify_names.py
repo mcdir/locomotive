@@ -1,15 +1,11 @@
-import codecs
-import locale
+import random
+
 import nltk
 from nltk.corpus import names
-import random
-import sys
 
 '''
 This is a modified version of a good example program in the O'Reilly NLTK book.
 '''
-
-sys.stdout = codecs.getwriter(locale.getpreferredencoding())(sys.stdout)
 
 
 def gender_features(word):

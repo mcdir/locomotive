@@ -1,5 +1,4 @@
 # system imports
-import unittest
 
 # application imports
 import app_test

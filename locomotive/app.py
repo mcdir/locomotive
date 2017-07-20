@@ -1,13 +1,9 @@
 import codecs
-import locale
-import nltk
-import sys
 import os
+import sys
 import urlparse
-
+import nltk
 import locomotive
-
-sys.stdout = codecs.getwriter(locale.getpreferredencoding())(sys.stdout)
 
 
 class Application:

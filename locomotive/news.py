@@ -1,8 +1,10 @@
-import nltk
 import re
 import string
-import locomotive
+
+import nltk
 from bs4 import BeautifulSoup
+
+import locomotive
 
 
 # This class is created to read a Reuters News Article from the nltk sample data,

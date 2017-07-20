@@ -1,16 +1,10 @@
-import codecs
-import locale
-import nltk
-from numpy import *
 import operator
 import os
 import pickle
 import random
-import sys
-
+from numpy import *
+import nltk
 import locomotive
-
-sys.stdout = codecs.getwriter(locale.getpreferredencoding())(sys.stdout)
 
 
 class Classify:

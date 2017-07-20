@@ -1,10 +1,7 @@
-import codecs
-import locale
-import nltk
 import numpy
-import sys
 
-sys.stdout = codecs.getwriter(locale.getpreferredencoding())(sys.stdout)
+import nltk
+
 
 class CategoryAssociations:
     def __init__(self, category_array):
@@ -13,11 +10,11 @@ class CategoryAssociations:
         self.matrix = self.initialize_matrix()  # matrix is a numpy 2-dimension array
 
     def initialize_category_idx_hash(self):
-        hash = {}
+        hash_dict = {}
         for (i, cat) in enumerate(self.category_array):
-            hash[cat] = i
-            hash[i] = cat
-        return hash
+            hash_dict[cat] = i
+            hash_dict[i] = cat
+        return hash_dict
 
     def initialize_matrix(self):
         return numpy.zeros((self.size(), self.size()))  # default to numpy.float64 elements

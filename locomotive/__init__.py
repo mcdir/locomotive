@@ -11,8 +11,8 @@ import app
 import capture
 import category_associations
 import classify
-import rss
 import news
 import recommend
+import rss
 
 sys.stdout = codecs.getwriter(locale.getpreferredencoding())(sys.stdout)

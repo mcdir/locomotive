@@ -1,12 +1,7 @@
-import codecs
 import feedparser
 import httplib
-import locale
 import pickle
-import sys
 from urlparse import urlparse
-
-sys.stdout = codecs.getwriter(locale.getpreferredencoding())(sys.stdout)
 
 
 class Capture:
@@ -28,7 +23,7 @@ class Capture:
         if self.save_responses():
             print(
                 'Capture.capture_as_pickled_feed - saving feed %d to file %s from url %s' % (
-                feed_number, filename, url))
+                    feed_number, filename, url))
             f = open(filename, 'w')
             pickle.dump(feed, f)
             f.close()

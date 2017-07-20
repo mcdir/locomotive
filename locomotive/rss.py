@@ -1,8 +1,10 @@
-import nltk
 import re
 import string
-import locomotive
+
+import nltk
 from bs4 import BeautifulSoup
+
+import locomotive
 
 
 # This class is dependent upon the feedparser library, as the "feed" object

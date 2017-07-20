@@ -1,7 +1,6 @@
-import os
-import unittest
-import sys
 import time
+import unittest
+
 import locomotive
 
 

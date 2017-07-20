@@ -1,7 +1,7 @@
-import os
 import logging
-import unittest
 import sys
+import unittest
+
 import locomotive
 
 
