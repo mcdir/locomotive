@@ -1,4 +1,3 @@
-
 import codecs
 import feedparser
 import httplib
@@ -9,8 +8,8 @@ from   urlparse import urlparse
 
 sys.stdout = codecs.getwriter(locale.getpreferredencoding())(sys.stdout)
 
-class Capture:
 
+class Capture:
     def __init__(self, application):
         self.app = application
         self.data_dir = self.app.data_directory()
@@ -27,8 +26,10 @@ class Capture:
         feed = feedparser.parse(url)
         filename = self.data_dir + 'feed_' + str(feed_number) + '.pkl'
         if self.save_responses():
-            print('Capture.capture_as_pickled_feed - saving feed %d to file %s from url %s' % (feed_number, filename, url))
-            f = open(filename,'w')
+            print(
+                'Capture.capture_as_pickled_feed - saving feed %d to file %s from url %s' % (
+                feed_number, filename, url))
+            f = open(filename, 'w')
             pickle.dump(feed, f)
             f.close()
         else:
@@ -42,9 +43,9 @@ class Capture:
         if self.save_responses():
             print "Capture.capture_as_xml - %s %s %s , %d lines" % (resp.status, resp.reason, url, feed_number)
             basename = 'feed_' + str(feed_number) + '.xml'
-            content  = resp.read()
+            content = resp.read()
             ucontent = self.app.to_unicode(content)
-            lines    = ucontent.splitlines()
+            lines = ucontent.splitlines()
             self.app.write_data_file(basename, lines)
         else:
             print 'Capture.capture_as_xml - save_responses is disabled'

@@ -1,4 +1,3 @@
-
 import codecs
 import locale
 import nltk
@@ -12,8 +11,10 @@ This is a modified version of a good example program in the O'Reilly NLTK book.
 
 sys.stdout = codecs.getwriter(locale.getpreferredencoding())(sys.stdout)
 
+
 def gender_features(word):
     return {'last_letter': word[-1], 'last_letter': word[-2]}
+
 
 def process_names():
     all_names = []
@@ -31,23 +32,23 @@ def process_names():
 
     if False:
         print(all_names)
-        for (n,g) in all_names:
+        for (n, g) in all_names:
             print('gender: ' + g + '  name: ' + n)
 
-    featuresets = [(gender_features(n), g) for (n,g) in all_names]
-    print('featuresets type: ' + str(type(featuresets))) # <type 'list'>
+    featuresets = [(gender_features(n), g) for (n, g) in all_names]
+    print('featuresets type: ' + str(type(featuresets)))  # <type 'list'>
 
-    test_names    = all_names[:500]
+    test_names = all_names[:500]
     devtest_names = all_names[500:1500]
-    train_names   = all_names[1500:]
+    train_names = all_names[1500:]
 
-    train_set     = [(gender_features(n), g) for (n,g) in train_names]
-    devtest_set   = [(gender_features(n), g) for (n,g) in devtest_names]
-    test_set      = [(gender_features(n), g) for (n,g) in test_names]
+    train_set = [(gender_features(n), g) for (n, g) in train_names]
+    devtest_set = [(gender_features(n), g) for (n, g) in devtest_names]
+    test_set = [(gender_features(n), g) for (n, g) in test_names]
 
-    print('train_set count:   ' + str(len(train_set)))   # 6444
-    print('devtest_set count: ' + str(len(devtest_set))) # 1000
-    print('test_set count:    ' + str(len(test_set)))    #  500
+    print('train_set count:   ' + str(len(train_set)))  # 6444
+    print('devtest_set count: ' + str(len(devtest_set)))  # 1000
+    print('test_set count:    ' + str(len(test_set)))  # 500
 
     # Having divided the corpus into appropriate datasets, we train a model using the training set.
     # and then run it on the dev-test set.
@@ -58,7 +59,7 @@ def process_names():
         sex = classifier.classify(gender_features(name))
         print('' + name + ' sex is: ' + sex)
 
-    print nltk.classify.accuracy(classifier, devtest_set) #
+    print nltk.classify.accuracy(classifier, devtest_set)  #
 
     classifier.show_most_informative_features(10)
     '''
@@ -79,6 +80,7 @@ def process_names():
         guess = classifier.classify(gender_features(name))
         if guess != tag:
             print 'incorrect; actual: %-8s  guess:%-8s  name: %-30s' % (tag, guess, name)
+
 
 process_names()
 

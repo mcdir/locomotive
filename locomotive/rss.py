@@ -1,15 +1,14 @@
-
 import nltk
 import re
 import string
 import locomotive
 from bs4 import BeautifulSoup
 
+
 # This class is dependent upon the feedparser library, as the "feed" object
 # passed to the constructor is a class in that library.
 
 class RssFeed:
-
     def __init__(self, feed, num, stop_words):
         self.feed = feed
         self.feed_number = num
@@ -27,9 +26,9 @@ class RssFeed:
             # object to the constructor of class RssItem.
             generic_hash = {}
             generic_hash['feed_number'] = self.feed_number
-            generic_hash['feed_url']    = self.feed['url']
-            generic_hash['feed_title']  = self.feed['channel']['title']
-            generic_hash['feed_desc']   = self.feed['channel']['description']
+            generic_hash['feed_url'] = self.feed['url']
+            generic_hash['feed_title'] = self.feed['channel']['title']
+            generic_hash['feed_desc'] = self.feed['channel']['description']
             generic_hash['item_number'] = i + 1
             if item_obj.has_key('title'):
                 generic_hash['title'] = item_obj['title']
@@ -48,24 +47,23 @@ class RssFeed:
 # or from simulated content such as the nltk news article data.
 
 class RssItem:
-
     regex = re.compile('[%s]' % re.escape(string.punctuation))
 
     def __init__(self, generic_hash, stop_words):
-        self.feed_url    = ''
+        self.feed_url = ''
         self.feed_number = 0
-        self.feed_title  = ''
-        self.feed_desc   = ''
+        self.feed_title = ''
+        self.feed_desc = ''
         self.item_number = 0
-        self.stop_words  = stop_words
-        self.author      = ''
-        self.title       = ''
-        self.category    = 'UNCAT'
-        self.categories  = []
-        self.tags        = []
-        self.all_words   = []
-        self.metadata    = ''
-        self.guess       = ''
+        self.stop_words = stop_words
+        self.author = ''
+        self.title = ''
+        self.category = 'UNCAT'
+        self.categories = []
+        self.tags = []
+        self.all_words = []
+        self.metadata = ''
+        self.guess = ''
 
         if generic_hash.has_key('feed_url'):
             self.feed_url = generic_hash['feed_url']
@@ -93,9 +91,9 @@ class RssItem:
 
         if generic_hash.has_key('tags'):
             tags = generic_hash['tags']
-            for t in tags: # t is a feedparser.FeedParserDict
+            for t in tags:  # t is a feedparser.FeedParserDict
                 if t.has_key('term'):
-                    term  = t['term']
+                    term = t['term']
                     words = self.normalized_words(term)
                     for w in words:
                         if self.stop_words.has_key(w):
@@ -160,7 +158,7 @@ class RssItem:
     def word_freq_dist(self):
         freqs = nltk.FreqDist()  # class nltk.probability.FreqDist
         for w in self.all_words:
-            #freqs.inc(w, 1)
+            # freqs.inc(w, 1)
             freqs[w] += 1
         return freqs
 
@@ -212,7 +210,7 @@ class RssItem:
     def as_debug_array(self, guess):
         l = []
         l.append('---')
-        #l.append('lookup_key:   %s' % (self.lookup_key()))
+        # l.append('lookup_key:   %s' % (self.lookup_key()))
         l.append('category:     %s' % (self.category))
         l.append('categories:   %s' % (self.joined_categories()))
         l.append('guess:        %s' % (guess))

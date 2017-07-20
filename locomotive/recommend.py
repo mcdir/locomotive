@@ -1,4 +1,3 @@
-
 import codecs
 import locale
 import nltk
@@ -13,16 +12,16 @@ import locomotive
 
 sys.stdout = codecs.getwriter(locale.getpreferredencoding())(sys.stdout)
 
-class Recommend:
 
+class Recommend:
     def __init__(self, application):
         self.app = application
 
     def recommend_categories_by_cats(self):
-        self.metadata   = self.read_reuters_metadata()
+        self.metadata = self.read_reuters_metadata()
         self.stop_words = self.app.stop_words()
-        self.all_words  = []
-        self.rss_items  = self.read_training_articles(self.metadata, 999999, self.stop_words)
+        self.all_words = []
+        self.rss_items = self.read_training_articles(self.metadata, 999999, self.stop_words)
         self.category_array = self.collect_unique_categories_by_freq()
         self.cat_assoc = locomotive.category_associations.CategoryAssociations(self.category_array)
         self.display_categories()
@@ -39,7 +38,8 @@ class Recommend:
             results = self.knn_classify(prof, self.dataset, self.labels, 10)
             print "cat1: %-10s  result is %s for case %d, %s" % (cat1, results, i, info)
             for tup in results:
-                cat2 = tup[0]; count = tup[1]
+                cat2 = tup[0];
+                count = tup[1]
                 if cat1 != cat2:
                     self.cat_assoc.increment(cat1, cat2, count)
                     self.cat_assoc.increment(cat2, cat1, count)
@@ -70,7 +70,7 @@ class Recommend:
         sorted_cats = []
         for item in self.rss_items:
             for w in item.categories:
-                #freqs.inc(w, 1)
+                # freqs.inc(w, 1)
                 freqs[w] += 1
         for cat in freqs.keys():
             sorted_cats.append(cat)
@@ -88,14 +88,16 @@ class Recommend:
             print "category_index %d = %s" % (i, cat)
 
     def collect_items_data(self):
-        labels = []; profiles = []; items_info = []
+        labels = [];
+        profiles = [];
+        items_info = []
         for item in self.rss_items:
             profile = []
             for cat in self.category_array:
-              if item.in_category(cat):
-                  profile.append(float(1.0))
-              else:
-                  profile.append(float(0.0))
+                if item.in_category(cat):
+                    profile.append(float(1.0))
+                else:
+                    profile.append(float(0.0))
             profiles.append(profile)
             labels.append(item.category)
             items_info.append("%s %s" % (item.feed_title, item.joined_categories()))
@@ -103,11 +105,11 @@ class Recommend:
 
     def knn_classify(self, inX, dataSet, labels, k):
         dataSetSize = dataSet.shape[0]
-        diffMat     = tile(inX, (dataSetSize, 1)) - dataSet
-        sqDiffMat   = diffMat ** 2
-        sqDistances = sqDiffMat.sum(axis = 1)
-        distances   = sqDistances ** 0.5
-        classCount  = {}
+        diffMat = tile(inX, (dataSetSize, 1)) - dataSet
+        sqDiffMat = diffMat ** 2
+        sqDistances = sqDiffMat.sum(axis=1)
+        distances = sqDistances ** 0.5
+        classCount = {}
         sortedDistIndicies = distances.argsort()
         for i in range(k):
             voteIlabel = labels[sortedDistIndicies[i]]
@@ -126,26 +128,26 @@ class Recommend:
         print "dataset:\n%s" % (str(dataset))
         print "labels: %s" % (str(labels))
         test_cases = []
-        test_cases.append([0.1,0.1,0.6])
-        test_cases.append([0.5,0.5,0.6])
-        test_cases.append([0.6,0.6,0.6])
-        test_cases.append([0.9,0.9,0.6])
+        test_cases.append([0.1, 0.1, 0.6])
+        test_cases.append([0.5, 0.5, 0.6])
+        test_cases.append([0.6, 0.6, 0.6])
+        test_cases.append([0.9, 0.9, 0.6])
         for tc in test_cases:
             result = self.knn_klassify(tc, dataset, labels, 3)
             print "result is %s for case %s , type: %s" % (result, str(tc), str(type(tc)))
 
     def create_simple_dataset(self):
-        group  = array([[1.0,1.1,0.5],[1.0,1.0, 0.5],[0.0,0.0,0.5],[0.0,0.1,0.5]])
-        labels = ['A','A','B','B']
+        group = array([[1.0, 1.1, 0.5], [1.0, 1.0, 0.5], [0.0, 0.0, 0.5], [0.0, 0.1, 0.5]])
+        labels = ['A', 'A', 'B', 'B']
         return group, labels
 
     def knn_klassify(self, inX, dataSet, labels, k):
         dataSetSize = dataSet.shape[0]
-        diffMat     = tile(inX, (dataSetSize, 1)) - dataSet
-        sqDiffMat   = diffMat ** 2
-        sqDistances = sqDiffMat.sum(axis = 1)
-        distances   = sqDistances ** 0.5
-        classCount  = {}
+        diffMat = tile(inX, (dataSetSize, 1)) - dataSet
+        sqDiffMat = diffMat ** 2
+        sqDistances = sqDiffMat.sum(axis=1)
+        distances = sqDistances ** 0.5
+        classCount = {}
         sortedDistIndicies = distances.argsort()
         for i in range(k):
             voteIlabel = labels[sortedDistIndicies[i]]
@@ -163,7 +165,7 @@ class Recommend:
         for a in articles:
             for w in a.all_words:
                 words.append(w)
-                #freqs.inc(w, 1)
+                # freqs.inc(w, 1)
                 freqs[w] += 1
 
         print('collect_all_words count: ' + str(len(words)))

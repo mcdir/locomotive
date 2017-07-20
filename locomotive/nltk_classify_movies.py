@@ -1,4 +1,3 @@
-
 import codecs
 import locale
 import nltk
@@ -12,15 +11,17 @@ This is a modified version of a good example program in the O'Reilly NLTK book.
 
 sys.stdout = codecs.getwriter(locale.getpreferredencoding())(sys.stdout)
 
+
 def load_movie_reviews():
-    reviews = [(list(movie_reviews.words(fileid)), category) for category in movie_reviews.categories() for fileid in movie_reviews.fileids(category)]
+    reviews = [(list(movie_reviews.words(fileid)), category) for category in movie_reviews.categories() for fileid in
+               movie_reviews.fileids(category)]
     random.shuffle(reviews)
-    print('' + str(len(reviews)) + ' reviews loaded') # 2000
+    print('' + str(len(reviews)) + ' reviews loaded')  # 2000
     if False:
         doc = reviews[0]
         print('doc type: ' + str(type(doc)) + ' length: ' + str(len(doc)))
         for elem in doc:
-          print('elem type: ' + str(type(elem)) + ' length: ' + str(len(elem)))
+            print('elem type: ' + str(type(elem)) + ' length: ' + str(len(elem)))
         '''
         doc type: <type 'tuple'> length: 2
           elem type: <type 'list'> length: 711  <- array of words in the movie review
@@ -28,18 +29,20 @@ def load_movie_reviews():
         '''
     return reviews
 
+
 def collect_all_words(reviews):
     words = []
     for review in reviews:
         review_words = review[0]
         for word in review_words:
             words.append(word)
-    print('collect_all_words count: ' + str(len(words))) # 1583820
+    print('collect_all_words count: ' + str(len(words)))  # 1583820
     if False:
         sample_words = words[:500]
         for word in sample_words:
             print('sample_word: ' + word)
     return words
+
 
 def identify_top_words(all_words):
     freq_dist = nltk.FreqDist(w.lower() for w in all_words)
@@ -52,12 +55,14 @@ def identify_top_words(all_words):
             print('top_word: ' + word)
     return top_words
 
+
 def document_features(document_words, word_features):
     doc_word_set = set(document_words)
     doc_features = {}
     for word in word_features:
         doc_features['contains(%s)' % word] = (word in doc_word_set)
     return doc_features
+
 
 def process_movies():
     documents = load_movie_reviews()
@@ -67,18 +72,18 @@ def process_movies():
 
     df = document_features(documents[0][0], word_features)
 
-    featuresets = [(document_features(d, word_features), category) for (d,category) in documents]
-    test_set    = featuresets[:100]
+    featuresets = [(document_features(d, word_features), category) for (d, category) in documents]
+    test_set = featuresets[:100]
     devtest_set = featuresets[100:200]
-    train_set   = featuresets[200:]
+    train_set = featuresets[200:]
 
     print('featuresets count: ' + str(len(featuresets)))  # 2000
-    print('test_set count:    ' + str(len(test_set)))     #  100
-    print('devtest_set count: ' + str(len(devtest_set)))  #  100
-    print('train_set count:   ' + str(len(train_set)))    # 1800
+    print('test_set count:    ' + str(len(test_set)))  # 100
+    print('devtest_set count: ' + str(len(devtest_set)))  # 100
+    print('train_set count:   ' + str(len(train_set)))  # 1800
 
     classifier = nltk.NaiveBayesClassifier.train(train_set)
-    print nltk.classify.accuracy(classifier, test_set) # 0.8
+    print nltk.classify.accuracy(classifier, test_set)  # 0.8
     classifier.show_most_informative_features(10)
     '''
         Most Informative Features
@@ -100,6 +105,7 @@ def process_movies():
         guess = classifier.classify(df)
         if guess != cat:
             print 'incorrect; actual: %-8s  guess:%-8s' % (cat, guess)
+
 
 process_movies()
 

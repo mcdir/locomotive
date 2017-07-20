@@ -320,7 +320,6 @@ class Classify:
         except Exception:
             print()
 
-
         for item in self.rss_items:
             for w in item.all_words:
                 all_words.append(w)

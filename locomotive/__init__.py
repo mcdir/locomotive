@@ -1,4 +1,3 @@
-
 # This __all__ statement enables wildcard imports like: 'from locomotive import *'.
 __all__ = ['app', 'capture', 'category_associations', 'classify', 'rss', 'news', 'recommend']
 
