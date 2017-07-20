@@ -1,10 +1,6 @@
-
-import sys
-import time
 import unittest
-import locomotive
 
-import locomotive_tests
+import locomotive
 
 '''
 This file is used to execute all of the unit tests.
@@ -13,9 +9,9 @@ which is assembled ino the alltests suite.
 '''
 
 if __name__ == "__main__":
-    app_suite = unittest.makeSuite(locomotive_tests.app_test.AppTest, 'test')
-    ca_suite  = unittest.makeSuite(locomotive_tests.category_associations_test.CategoryAssociationTest, 'test')
-    fi_suite  = unittest.makeSuite(locomotive_tests.rss_item_test.RssItemTest, 'test')
+    app_suite = unittest.makeSuite(locomotive.locomotive_tests.app_test.AppTest, 'test')
+    ca_suite  = unittest.makeSuite(locomotive.locomotive_tests.category_associations_test.CategoryAssociationTest, 'test')
+    fi_suite  = unittest.makeSuite(locomotive.locomotive_tests.rss_item_test.RssItemTest, 'test')
     alltests  = unittest.TestSuite((app_suite, ca_suite, fi_suite))
     runner    = unittest.TextTestRunner()
     runner.run(alltests)
